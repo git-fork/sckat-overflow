@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <i mat-list-icon class="{{ question.icon }} icon"></i>
+    </div>
+    <mat-card-title>
+      <h2>{{ question.title }}</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <small>Luis Mendoza - {{ question.createdAt | amTimeAgo }}</small>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ question.description }}</p>
+  </mat-card-content>
+</mat-card>
