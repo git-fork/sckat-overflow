@@ -12,3 +12,11 @@ form {
   width: 90%;
   margin: 40px auto;
 }
+
+[ng-reflect-router-link] {
+  cursor: pointer;
+}
+
+[ng-reflect-router-link]:focus {
+  outline: 0;
+}

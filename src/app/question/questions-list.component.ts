@@ -18,6 +18,12 @@ const q = new Question(
       font-size: 32px !important;
       padding: 0 !important;
     }
+
+    .add-question {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+    }
   `
   ]
 })
