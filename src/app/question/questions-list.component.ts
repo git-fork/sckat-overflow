@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Question } from './question.model';
+import { QuestionsService } from './questions.service'
 
 const q = new Question(
   'How do JavaScript closures work?',
@@ -25,8 +26,21 @@ const q = new Question(
       right: 30px;
     }
   `
-  ]
+  ],
+  providers: [QuestionsService]
 })
-export class QuestionsListComponent {
-  questions: Question[] = new Array(10).fill(q);
+export class QuestionsListComponent implements OnInit {
+  constructor (private questionsService: QuestionsService) {}
+
+  questions: Question[];
+  loading = true;
+
+  ngOnInit() {
+    this.questionsService
+      .getQuestions()
+      .then((questions: Question[]) => {
+        this.questions = questions;
+        this.loading = false;
+      });
+  }
 }
