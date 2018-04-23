@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Question } from './question.model';
 import icons from './icons';
+import { QuestionsService } from './questions.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-question-form',
@@ -14,10 +16,16 @@ import icons from './icons';
     small {
       display: block;
     }
-  `]
+  `],
+  providers: [QuestionsService]
 })
 export class QuestionFormComponent {
   icons: Object[] = icons;
+
+  constructor(
+    private questionsService: QuestionsService,
+    private router: Router
+  ) {}
 
   getIconVersion(icon: any) {
     let version;
@@ -37,6 +45,12 @@ export class QuestionFormComponent {
       form.value.icon
     );
 
-    console.log(q);
+    this.questionsService.addQuestion(q)
+      .subscribe(
+        ({ _id }) => this.router.navigate(['/questions', _id]),
+        error => console.log(error)
+      );
+
+    form.resetForm();
   }
 }
