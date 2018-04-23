@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Answer } from './answer.model';
 import { User } from '../auth/user.model';
 import { Question } from '../question/question.model';
+import { QuestionsService } from '../question/questions.service';
+import * as SmoothScroll from 'smooth-scroll';
 
 @Component({
   selector: 'app-answer-form',
@@ -11,19 +13,32 @@ import { Question } from '../question/question.model';
     form {
       margin-top: 20px;
     }
-  `]
+  `],
+  providers: [QuestionsService]
 })
 export class AnswerFormComponent {
   @Input() question: Question;
+  smoothScroll: SmoothScroll;
+
+  constructor(private questionsService: QuestionsService) {
+    this.smoothScroll = new SmoothScroll();
+  }
 
   onSubmit(form: NgForm) {
     const answer = new Answer(
       form.value.description,
-      this.question,
-      new Date(),
-      new User(null, null, 'Nina', 'Scholz')
+      this.question
     );
-    this.question.answers.unshift(answer);
+    this.questionsService
+      .addAnswer(answer)
+      .subscribe(
+        a => {
+          this.question.answers.unshift(a);
+          const anchor = document.querySelector('#answersTitle')
+          this.smoothScroll.animateScroll(anchor);
+        },
+        error => console.log(error)
+      );
     form.reset();
   }
 }
