@@ -46,4 +46,10 @@ export class AuthService {
   isLoggedIn() {
     return localStorage.getItem('token') !== null;
   }
+
+  logout() {
+    localStorage.clear();
+    this.currentUser = null;
+    this.router.navigateByUrl('/');
+  }
 }
