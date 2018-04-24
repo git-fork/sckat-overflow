@@ -1,23 +1,11 @@
 import express from 'express'
 import Debug from 'debug'
 import jwt from 'jsonwebtoken'
+import { secret } from '../config'
+import { users, findUserByEmail } from '../middlewares'
 
 const app = express.Router()
-const debug = new Debug('sckat-overflow:root')
-
-const secret = 'mysecretkey'
-
-const users = [
-  {
-    firstName: 'Nina',
-    lastName: 'Scholz',
-    email: 'nina@scholz.com',
-    password: '123456',
-    _id: 123
-  }
-]
-
-const findUserByEmail = providedEmail => users.find(({ email }) => email === providedEmail)
+const debug = new Debug('sckat-overflow:auth-routes')
 
 function comparePasswords(providedPassword, userPassword) {
   return providedPassword === userPassword
