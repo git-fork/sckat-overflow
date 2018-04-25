@@ -6,29 +6,29 @@ A Stack Overflow clone using the MEAN stack. This project was generated with [An
 
 > Home (Questions List)
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685684/01-home_kt9tzo.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685684/01-home_kt9tzo.png)
 
 > Sign In
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685684/02-signin_sd43ru.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685684/02-signin_sd43ru.png)
 
 > Sign Up
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685684/03-signup_wupqho.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685684/03-signup_wupqho.png)
 
 > Question Detail
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685684/04-question_aj0t9d.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685684/04-question_aj0t9d.png)
 
 > New Question
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685684/05-newq_qb6erc.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685684/05-newq_qb6erc.png)
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685684/06-newq_zhswjn.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685684/06-newq_zhswjn.png)
 
 > Home (Logged In)
 
-![](http://res.cloudinary.com/luisantoniome/image/upload/v1524685685/07-home-logged_gk6h90.png)
+![](http://res.cloudinary.com/luisantoniome/image/upload/c_scale,w_300/v1524685685/07-home-logged_gk6h90.png)
 
 ## Development server
 
