@@ -16,13 +16,13 @@ app.get('/:id', questionMiddleware, (req, res) => {
 })
 
 // POST /api/questions
-app.post('/', required, (req, res) => {
+app.post('/', required, questionsMiddleware, (req, res) => {
   const question = req.body
   question._id = +new Date() // timestamp
   question.user = req.user
   question.createdAt = new Date()
   question.answers = []
-  questions.unshift(question)
+  req.questions.unshift(question)
   res.status(201).json(question)
 })
 

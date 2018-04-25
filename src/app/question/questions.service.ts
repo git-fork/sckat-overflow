@@ -35,8 +35,9 @@ export class QuestionsService {
   addQuestion(question: Question) {
     const body = JSON.stringify(question);
     const headers = new Headers({ 'Content-Type': 'application/json' });
+    const token = this.getToken();
 
-    return this.http.post(this.questionsUrl, body, { headers })
+    return this.http.post(this.questionsUrl + token, body, { headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => Observable.throw(error.json()));
   }
@@ -52,9 +53,16 @@ export class QuestionsService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const questionId = answer.question._id.toString();
     const url = urljoin(this.questionsUrl, questionId, 'answers')
-    return this.http.post(url, body, { headers })
+    const token = this.getToken();
+
+    return this.http.post(url + token, body, { headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => Observable.throw(error.json()));
+  }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+    return `?token=${token}`;
   }
 
   handleError(error: any) {
