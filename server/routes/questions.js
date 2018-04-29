@@ -1,22 +1,32 @@
 import express from 'express'
-import {
-  required,
-  questionMiddleware,
-  questionsMiddleware
-} from '../middlewares'
+import { required } from '../middlewares'
+import { question } from '../db-api'
+import { handleError } from '../utils'
 
 const app = express.Router()
 
 // GET /api/questions
-app.get('/', questionsMiddleware, (req, res) => res.status(200).json(req.questions))
+app.get('/', async (req, res) => {
+  try {
+    const questions = await question.findAll()
+    res.status(200).json(questions)
+  } catch (error) {
+    handleError(error, res)
+  }
+})
 
 // GET /api/questions/:id
-app.get('/:id', questionMiddleware, (req, res) => {
-  res.status(200).json(req.question)
+app.get('/:id', async (req, res) => {
+  try {
+    const q = await question.findById(req.params.id)
+    res.status(200).json(q)
+  } catch (error) {
+    handleError(error, res)
+  }
 })
 
 // POST /api/questions
-app.post('/', required, questionsMiddleware, (req, res) => {
+app.post('/', required, (req, res) => {
   const question = req.body
   question._id = +new Date() // timestamp
   question.user = req.user
@@ -27,7 +37,7 @@ app.post('/', required, questionsMiddleware, (req, res) => {
 })
 
 // POST /api/questions/:id/answers
-app.post('/:id/answers', required, questionMiddleware, (req, res) => {
+app.post('/:id/answers', required, (req, res) => {
   const answer = req.body
   const q = req.question
   answer.createdAt = new Date()
