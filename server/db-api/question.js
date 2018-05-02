@@ -1,26 +1,44 @@
 import Debug from 'debug'
-import { Question } from '../models'
+import { Question, Answer } from '../models'
 
 const debug = new Debug('sckat-overflow:db-api:question')
 
 export default {
-  findAll: async () => {
+  findAll: () => {
     debug('Finding all questions')
-    return await Question.find().populate('answers')
+    return Question.find().populate('answers')
   },
 
-  findById: async (_id) => {
-    debug(`Finding question with id ${id}`)
-    return await Question
+  findById: (_id) => {
+    debug(`Finding question with id ${_id}`)
+    return Question
       .findOne({ _id })
-      .populate('user')
+      .populate({
+        path: 'user',
+        select: '-password'
+      })
       .populate({
         path: 'answers',
         options: { sort: '-createdAt' },
         populate: {
           path: 'user',
-          model: 'User'
+          model: 'User',
+          select: '-password'
         }
       })
+  },
+
+  create: (q) => {
+    debug(`Creating new question ${q}`)
+    const question = new Question(q)
+    return question.save()
+  },
+
+  createAnswer: async (q, a) => {
+    const answer = new Answer(a)
+    const savedAnswer = await answer.save()
+    q.answers.push(answer)
+    await q.save()
+    return savedAnswer
   }
 }
